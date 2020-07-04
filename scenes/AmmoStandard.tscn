@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://textures/Building/spaceBuilding_007.png" type="Texture" id=1]
+[ext_resource path="res://scripts/Projectile.cs" type="Script" id=2]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 48.0132
+
+[node name="AmmoStandard" type="Area2D"]
+scale = Vector2( 0.2, 0.2 )
+script = ExtResource( 2 )
+DamageAmount = 30.0
+Speed = 5000.0
+
+[node name="AmmoSprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Timer" type="Timer" parent="."]
+process_mode = 0
+wait_time = 1.5
+one_shot = true
+autostart = true
+[connection signal="body_entered" from="." to="." method="BodyEntered"]
+[connection signal="timeout" from="Timer" to="." method="Destroy"]
